@@ -12,7 +12,7 @@ const formReducer = (state, action) => {
     case 'SET_VENDOR_LOGO':
       return { ...state, vendorLogo: action.payload, vendorLogoUrl: URL.createObjectURL(action.payload) };
     case 'RESET':
-      return { vendorName: '', content: '',vendor_detailsL:'' ,vendorLogo: null ,vendorLogoUrl: null};
+      return { vendorName: '', content: '', vendor_details:'' ,vendorLogo: null ,vendorLogoUrl: null};
     default:
       return state;
   }
