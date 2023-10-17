@@ -5,14 +5,14 @@ const formReducer = (state, action) => {
   switch (action.type) {
     case 'SET_VENDOR_NAME':
       return { ...state, vendorName: action.payload };
-    case 'SET_DESCRIPTION':
-      return { ...state, description: action.payload };
-    case 'SET_VENDOR_IMAGE':
-      return { ...state, vendorImage: action.payload, vendorImageUrl: URL.createObjectURL(action.payload) };
+    case 'SET_CONTENT':
+      return { ...state, content: action.payload };
+    case 'SET_VENDOR_DETAILS':
+      return { ...state, vendor_details: action.payload};
     case 'SET_VENDOR_LOGO':
       return { ...state, vendorLogo: action.payload, vendorLogoUrl: URL.createObjectURL(action.payload) };
     case 'RESET':
-      return { vendorName: '', description: '', vendorImage: null, vendorLogo: null , vendorImageUrl: null, vendorLogoUrl: null};
+      return { vendorName: '', content: '',vendor_detailsL:'' ,vendorLogo: null ,vendorLogoUrl: null};
     default:
       return state;
   }
@@ -21,9 +21,8 @@ const formReducer = (state, action) => {
 export default function Form() {
   const [formState, dispatch] = useReducer(formReducer, {
     vendorName: '',
-    description: '',
-    vendorImage: null,
-    vendorImageUrl: null,
+    content: '',
+    vendor_details:'',
     vendorLogo: null,
     vendorLogoUrl: null,
   });
@@ -41,11 +40,11 @@ export default function Form() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-green-500">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+      <div className="bg-white p-14 rounded-lg shadow-lg w-[500px]">
         <h1 className="text-2xl font-semibold mb-4">Vendor Form</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="vendorName" className="block text-sm font-medium text-gray-600">
+            <label htmlFor="vendorName" className="block text-sm font-medium text-black">
               Vendor Name
             </label>
             <input
@@ -53,40 +52,41 @@ export default function Form() {
               id="vendorName"
               value={formState.vendorName}
               onChange={(e) => dispatch({ type: 'SET_VENDOR_NAME', payload: e.target.value })}
-              className="w-full border border-gray-300 rounded-md p-2"
+              className="w-full border border-black rounded-md p-2"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="description" className="block text-sm font-medium text-gray-600">
-              Description
+            <label htmlFor="description" className="block text-sm font-medium text-black">
+            Content
             </label>
             <textarea
-              id="description"
-              value={formState.description}
-              onChange={(e) => dispatch({ type: 'SET_DESCRIPTION', payload: e.target.value })}
-              className="w-full border border-gray-300 rounded-md p-2 h-32"
+              id="content"
+              value={formState.content}
+              onChange={(e) => dispatch({ type: 'SET_CONTENT', payload: e.target.value })}
+              className="w-full border border-black rounded-md p-2 h-32"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="vendorImage" className="block text-sm font-medium text-gray-600">
-              Vendor Image
+            <label htmlFor="vendorImage" className="block text-sm font-medium text-black">
+              Vendor Details
             </label>
             <input
-              type="file"
-              id="vendorImage"
-              onChange={(e) => dispatch({ type: 'SET_VENDOR_IMAGE', payload: e.target.files[0] })}
-              className="w-full border border-gray-300 rounded-md"
+              type="text"
+              id="vendor_details"
+              value={formState.vendor_details}
+              onChange={(e) => dispatch({ type: 'SET_VENDOR_DETAILS', payload: e.target.value })}
+              className="w-full border border-black rounded-md"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="vendorLogo" className="block text-sm font-medium text-gray-600">
+            <label htmlFor="vendorLogo" className="block text-sm font-medium text-black">
               Vendor Logo
             </label>
             <input
               type="file"
               id="vendorLogo"
               onChange={(e) => dispatch({ type: 'SET_VENDOR_LOGO', payload: e.target.files[0] })}
-              className="w-full border border-gray-300 rounded-md"
+              className="w-full "
             />
           </div>
           <div>
